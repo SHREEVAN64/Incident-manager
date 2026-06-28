@@ -1,13 +1,13 @@
 P1_KEYWORDS = [
     "outage", "down", "critical", "production down", "data loss", "breach",
     "complete failure", "all users affected", "revenue impact", "database down",
-    "service unavailable", "cannot access", "total outage"
+    "service unavailable", "cannot access", "total outage","Jira-tool down"
 ]
 
 P2_KEYWORDS = [
     "slow", "degraded", "high latency", "partial", "intermittent", 
     "some users", "performance degradation", "timeout", "memory leak",
-    "disk space", "cpu spike", "connection refused"
+    "disk space", "cpu spike", "connection refused","Jira-tool is very slow"
 ]
 
 P3_KEYWORDS = [
@@ -51,14 +51,4 @@ def classify_incident(description: str):
 
 
 if __name__ == "__main__":
-    test_cases = [
-        "Production server is down - all users affected",
-        "Application running slow - some performance degradation",
-        "Minor warning in logs",
-        "Routine maintenance check scheduled"
-    ]
     
-    for test in test_cases:
-        result = classify_incident(test)
-        print(f"Input: {test}")
-        print(f"Result: {result}\n")
