@@ -51,5 +51,14 @@ def classify_incident(description: str):
 
 
 if __name__ == "__main__":
-    pass
+    test_cases = [
+        "Production server is down - all users affected",
+        "Application running slow - some performance degradation",
+        "Minor warning in logs",
+        "Routine maintenance check scheduled"
+    ]
     
+    for test in test_cases:
+        result = classify_incident(test)
+        print(f"Input: {test}")
+        print(f"Result: {result}\n")

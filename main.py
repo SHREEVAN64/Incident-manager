@@ -3,6 +3,7 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from classifier import classify_incident
 from datetime import datetime
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI(title="Incident Severity Classifier")
 
@@ -39,3 +40,5 @@ def get_history():
         "total_classifications": len(classification_history),
         "history": classification_history
     }
+
+app.mount("/", StaticFiles(directory="Incident-Dashboard", html=True), name="static")

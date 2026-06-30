@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI-Powered Incident Severity Classifier Dashboard">
+  <title>Incident Severity Classifier</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <div class="logo-icon">
+          <!-- A sleek warning/shield SVG icon -->
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L2 22h20L12 2zm0 3.99L19.53 19H4.47L12 5.99zM11 11h2v4h-2v-4zm0 6h2v2h-2v-2z"/>
+          </svg>
+        </div>
+        <h1>Incident Severity Intelligence</h1>
+      </div>
+      <div class="api-status" id="api-status">
+        <span class="status-dot" id="status-dot"></span>
+        <span id="status-text">Connecting...</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Left Column: Input and Results -->
+    <div style="display: flex; flex-direction: column; gap: 2rem;">
+      
+      <!-- Input Card -->
+      <section class="card">
+        <h2 class="card-title">Classify Incident</h2>
+        <form id="classify-form" style="display: flex; flex-direction: column; gap: 1.25rem;">
+          <div class="input-group">
+            <label for="description-input" class="input-label">Incident Description or Logs</label>
+            <textarea 
+              id="description-input" 
+              placeholder="e.g., Database connection pool exhausted. Production server down, all users receiving 504 gateway timeout errors."
+              required
+            ></textarea>
+          </div>
+          <button type="submit" id="submit-btn">
+            <span id="btn-text">Classify Severity</span>
+            <span class="loader" id="loader"></span>
+          </button>
+        </form>
+      </section>
+
+      <!-- Result Card -->
+      <section class="card">
+        <h2 class="card-title">Analysis Result</h2>
+        
+        <!-- Placeholder when no result yet -->
+        <div class="result-placeholder" id="result-placeholder">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+          </svg>
+          <p>Submit an incident description above to run the AI classifier and analyze the severity level.</p>
+        </div>
+
+        <!-- Result details container -->
+        <div class="result-display" id="result-display">
+          <div class="result-header">
+            <span class="input-label">Assigned Severity</span>
+            <span class="result-badge" id="result-badge">P4</span>
+          </div>
+          
+          <div class="confidence-container">
+            <div class="confidence-header">
+              <span>Classification Confidence</span>
+              <span id="confidence-text">0%</span>
+            </div>
+            <div class="confidence-bar-outer">
+              <div class="confidence-bar-inner" id="confidence-bar"></div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+    </div>
+
+    <!-- Right Column: Classification History -->
+    <section class="card">
+      <div class="history-header">
+        <h2>Classification History</h2>
+        <span class="history-count" id="history-count">0 items</span>
+      </div>
+
+      <div class="history-scroll">
+        <!-- Loader/Placeholder for history -->
+        <div class="no-history" id="no-history">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <p>No classifications in history</p>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">Run classification to start tracking history.</span>
+        </div>
+        
+        <div class="history-list" id="history-list" style="display: none;">
+          <!-- History items will be injected here dynamically -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Incident Severity Intelligence Engine &bull; Co-served Locally via FastAPI</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
